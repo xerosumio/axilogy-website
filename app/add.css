@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+  .btn-text {
+    display: flex;
+  }
+  .mp {
+    padding: 0px 25px 0px 25px;
+  }
+  .mf {
+    font-size: 3rem;
+  }
+}
