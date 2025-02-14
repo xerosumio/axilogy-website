@@ -247,7 +247,7 @@ export default function CubyProductPage() {
           </p>
           <Button
             size="lg"
-            className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-8 py-6 text-lg rounded-full"
+            className="btn-width bg-pink-600 hover:bg-pink-700 text-white font-semibold px-8 py-6 text-lg rounded-full"
             onClick={handleContactClick}
           >
             Contact Us for More Information

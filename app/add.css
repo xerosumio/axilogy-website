@@ -3,9 +3,17 @@
     display: flex;
   }
   .mp {
-    padding: 0px 25px 0px 25px;
+    /* padding: 0px 25px 0px 25px; */
   }
   .mf {
     font-size: 3rem;
+  }
+  .btn-width {
+    width: 100%;
+  }
+}
+@media (max-width: 540px) {
+  .mf {
+    font-size: 2.3rem;
   }
 }

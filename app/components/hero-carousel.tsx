@@ -32,9 +32,18 @@ const AutoChangingText = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleAnimationEnd = () => {
+    setAnimationClass(""); // 重置 animationClass 状态
+  };
+
   return (
     <span className="inline-block w-[300px]">
-      <span className={`inline-block ${animationClass}`}>{text}</span>
+      <span
+        className={`inline-block ${animationClass}`}
+        onAnimationEnd={handleAnimationEnd}
+      >
+        {text}
+      </span>
     </span>
   );
 };

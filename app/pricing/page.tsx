@@ -1,6 +1,13 @@
-"use client"
-import { motion } from "framer-motion"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+"use client";
+import { motion } from "framer-motion";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   CheckCircle2,
   XCircle,
@@ -16,16 +23,34 @@ import {
   Monitor,
   ChevronRight,
   ChevronLeft,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { useSmoothScroll } from "../hooks/useSmoothScroll"
-import Image from "next/image"
-import { useState } from "react"
-
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useSmoothScroll } from "../hooks/useSmoothScroll";
+import Image from "next/image";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 export default function PricingPage() {
-  const sectionsRef = useSmoothScroll()
-  const [activeSlide, setActiveSlide] = useState(0)
+  const router = useRouter();
+  const handleCallUsNowClick = () => {
+    router.push("/contact");
+    // Add a small delay to ensure the page transition is complete
+    setTimeout(() => {
+      const firstSlide = document.querySelector("section");
+      if (firstSlide) {
+        firstSlide.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
+
+  const sectionsRef = useSmoothScroll();
+  const [activeSlide, setActiveSlide] = useState(0);
 
   const specs = [
     {
@@ -67,10 +92,15 @@ export default function PricingPage() {
         { label: "HDMI Ports", value: "1" },
       ],
     },
-  ]
+  ];
 
   const features = [
-    { name: "On-premises deployment", cuby: true, chatgpt: false, gemini: false },
+    {
+      name: "On-premises deployment",
+      cuby: true,
+      chatgpt: false,
+      gemini: false,
+    },
     { name: "Offline capability", cuby: true, chatgpt: false, gemini: false },
     { name: "Data privacy", cuby: true, chatgpt: false, gemini: false },
     { name: "Customizable model", cuby: true, chatgpt: false, gemini: false },
@@ -82,7 +112,7 @@ export default function PricingPage() {
     { name: "API access", cuby: true, chatgpt: true, gemini: true },
     { name: "Web search integration", cuby: true, chatgpt: true, gemini: true },
     { name: "Regular updates", cuby: true, chatgpt: true, gemini: true },
-  ]
+  ];
 
   return (
     <main className="bg-gray-900 relative">
@@ -102,13 +132,22 @@ export default function PricingPage() {
         className="min-h-screen flex items-center justify-center py-24 relative z-10"
       >
         <div className="container mx-auto px-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">
               CUBY<span className="text-pink-500">AI</span> Pricing
             </h1>
           </motion.div>
 
-          <Carousel className="w-full" setApi={undefined} onSelect={setActiveSlide} index={activeSlide}>
+          <Carousel
+            className="w-full"
+            setApi={undefined}
+            onSelect={setActiveSlide}
+            index={activeSlide}
+          >
             <CarouselContent>
               {/* Pricing Slide */}
               <CarouselItem>
@@ -116,10 +155,16 @@ export default function PricingPage() {
                   <div className="bg-gray-800/90 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-700 max-w-4xl w-full">
                     <div className="grid md:grid-cols-2 gap-8">
                       <div>
-                        <h2 className="text-2xl font-bold text-white mb-4">CUBYAI Enterprise Package</h2>
+                        <h2 className="text-2xl font-bold text-white mb-4">
+                          CUBYAI Enterprise Package
+                        </h2>
                         <div className="flex items-center mb-6">
-                          <span className="text-4xl font-bold text-pink-500">20,000 HKD</span>
-                          <span className="text-lg text-white/70 ml-2">one-time</span>
+                          <span className="text-4xl font-bold text-pink-500">
+                            20,000 HKD
+                          </span>
+                          <span className="text-lg text-white/70 ml-2">
+                            one-time
+                          </span>
                         </div>
                         <ul className="text-white/80 text-base mb-6 space-y-2">
                           <li className="flex items-center">
@@ -149,6 +194,7 @@ export default function PricingPage() {
                         </ul>
                         <div className="text-center md:text-left">
                           <Button
+                            onClick={handleCallUsNowClick}
                             size="lg"
                             className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-3 text-base rounded-full w-full md:w-auto"
                           >
@@ -177,19 +223,30 @@ export default function PricingPage() {
               <CarouselItem>
                 <div className="flex justify-center">
                   <div className="bg-gray-800/90 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-700 max-w-4xl w-full">
-                    <h2 className="text-2xl font-bold text-white mb-6">Technical Specifications</h2>
+                    <h2 className="text-2xl font-bold text-white mb-6">
+                      Technical Specifications
+                    </h2>
                     <div className="grid md:grid-cols-2 gap-8">
                       {specs.map((section, index) => (
                         <div key={index} className="space-y-4">
                           <div className="flex items-center gap-2 mb-4">
                             <section.icon className="h-6 w-6 text-pink-500" />
-                            <h3 className="text-lg font-semibold text-white">{section.category}</h3>
+                            <h3 className="text-lg font-semibold text-white">
+                              {section.category}
+                            </h3>
                           </div>
                           <div className="space-y-2">
                             {section.items.map((item, itemIndex) => (
-                              <div key={itemIndex} className="flex justify-between text-sm">
-                                <span className="text-gray-400">{item.label}</span>
-                                <span className="text-white font-medium">{item.value}</span>
+                              <div
+                                key={itemIndex}
+                                className="flex justify-between text-sm"
+                              >
+                                <span className="text-gray-400">
+                                  {item.label}
+                                </span>
+                                <span className="text-white font-medium">
+                                  {item.value}
+                                </span>
                               </div>
                             ))}
                           </div>
@@ -223,7 +280,9 @@ export default function PricingPage() {
         className="min-h-screen flex items-center justify-center py-12 px-4 relative z-10"
       >
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">Feature Comparison</h2>
+          <h2 className="text-3xl font-bold text-white mb-8 text-center">
+            Feature Comparison
+          </h2>
 
           <div className="overflow-x-auto shadow-md rounded-lg">
             <div className="inline-block min-w-full align-middle">
@@ -247,8 +306,15 @@ export default function PricingPage() {
                   </TableHeader>
                   <TableBody>
                     {features.map((feature, index) => (
-                      <TableRow key={index} className={index % 2 === 0 ? "bg-gray-800/80" : "bg-gray-900/80"}>
-                        <TableCell className="py-2 px-4 text-xs font-medium text-white">{feature.name}</TableCell>
+                      <TableRow
+                        key={index}
+                        className={
+                          index % 2 === 0 ? "bg-gray-800/80" : "bg-gray-900/80"
+                        }
+                      >
+                        <TableCell className="py-2 px-4 text-xs font-medium text-white">
+                          {feature.name}
+                        </TableCell>
                         <TableCell className="py-2 px-4 text-center">
                           {feature.cuby ? (
                             <CheckCircle2 className="h-4 w-4 text-green-500 mx-auto" />
@@ -286,21 +352,26 @@ export default function PricingPage() {
       >
         <div className="container mx-auto px-4 text-center">
           <div className="bg-gray-800/90 backdrop-blur-sm p-8 rounded-lg border border-gray-700 max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-6">Why Choose CUBYAI?</h2>
+            <h2 className="text-3xl font-bold text-white mb-6">
+              Why Choose CUBYAI?
+            </h2>
             <p className="text-white/80 text-lg mb-6">
-              CUBYAI offers unparalleled privacy and control with its on-premises deployment, making it the ideal choice
-              for businesses that prioritize data security and customization.
+              CUBYAI offers unparalleled privacy and control with its
+              on-premises deployment, making it the ideal choice for businesses
+              that prioritize data security and customization.
             </p>
             <p className="text-white/80 text-lg mb-6">
-              With our one-time pricing model, you get full access to all features without any recurring costs, allowing
-              you to leverage AI technology without straining your budget.
+              With our one-time pricing model, you get full access to all
+              features without any recurring costs, allowing you to leverage AI
+              technology without straining your budget.
             </p>
             <p className="text-white/80 text-lg mb-8 font-semibold">
-              Powered by NATON LAB, CUBYAI brings you state-of-the-art AI capabilities tailored for enterprise needs.
+              Powered by NATON LAB, CUBYAI brings you state-of-the-art AI
+              capabilities tailored for enterprise needs.
             </p>
             <Button
               size="lg"
-              className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-8 py-4 text-lg rounded-full"
+              className="btn-width bg-pink-600 hover:bg-pink-700 text-white font-semibold px-8 py-4 text-lg rounded-full"
             >
               Contact Us for More Information
             </Button>
@@ -308,6 +379,5 @@ export default function PricingPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }
-

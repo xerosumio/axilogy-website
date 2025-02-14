@@ -6,6 +6,7 @@ export function useSmoothScroll() {
   useEffect(() => {
     const sections = sectionsRef.current.filter((section): section is HTMLElement => section !== null)
     let currentSectionIndex = 0
+    let isScrolling = false
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -22,12 +23,18 @@ export function useSmoothScroll() {
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault()
-      if (e.deltaY > 0 && currentSectionIndex < sections.length - 1) {
-        currentSectionIndex++
-      } else if (e.deltaY < 0 && currentSectionIndex > 0) {
-        currentSectionIndex--
+      if (!isScrolling) {
+        isScrolling = true
+        setTimeout(() => {
+          isScrolling = false
+        }, 1000)
+        if (e.deltaY > 0 && currentSectionIndex < sections.length - 1) {
+          currentSectionIndex++
+        } else if (e.deltaY < 0 && currentSectionIndex > 0) {
+          currentSectionIndex--
+        }
+        sections[currentSectionIndex].scrollIntoView({ behavior: "smooth" })
       }
-      sections[currentSectionIndex].scrollIntoView({ behavior: "smooth" })
     }
 
     window.addEventListener("wheel", handleWheel, { passive: false })
@@ -40,4 +47,3 @@ export function useSmoothScroll() {
 
   return sectionsRef
 }
-
