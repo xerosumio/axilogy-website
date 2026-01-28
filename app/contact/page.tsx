@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Phone, Mail } from "lucide-react"
+import { Mail } from "lucide-react"
 import Navbar from "../components/navbar"
 import Footer from "../components/footer"
 import { useSmoothScroll } from "../hooks/useSmoothScroll"
@@ -72,12 +72,8 @@ export default function ContactPage() {
                 <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
                 <div className="space-y-4">
                   <div className="flex items-center text-white">
-                    <Phone className="w-6 h-6 mr-4 text-pink-500" />
-                    <span>+852 1234 5678</span>
-                  </div>
-                  <div className="flex items-center text-white">
                     <Mail className="w-6 h-6 mr-4 text-pink-500" />
-                    <span>info@axilogy.com</span>
+                    <span>info@axilogy.io</span>
                   </div>
                 </div>
 
