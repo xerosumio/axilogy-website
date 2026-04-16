@@ -64,7 +64,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400">&copy; {new Date().getFullYear()} Axilogy. All rights reserved.</p>
+          <p className="text-gray-400">&copy; 2022 Axilogy Limited. All rights reserved.</p>
         </div>
       </div>
     </footer>
